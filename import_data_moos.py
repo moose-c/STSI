@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 pd.set_option('display.max_colwidth', None)
 
 food_loss = pd.read_csv('Food Loss Data.csv')
-temperature = pd.read_csv('matYearCountry.csv')
+temperature = pd.read_csv('matYearCountry.csv', index_col=0)
 GDP = pd.read_csv('global_gdp.csv')
 
 # print(GDP.head(5))
@@ -29,3 +29,16 @@ food_loss_whole_chain['loss_percentage']
 # print(countries.unique())
 
 # investige row 'activity' (whole supply chain)
+
+# decipher temperature data
+temperature['Albania'][2010]
+
+# make usable dataset
+data = pd.DataFrame(columns=["country", "year", "loss_percentage", "GDP", "temperature"])
+for index, row in food_loss_whole_chain.iterrows():
+    addition = {}
+    addition["country"] = row["country"]
+    addition["year"] = row["year"]
+    addition["loss_percentage"] = row["loss_percentage"]
+    addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 2015
+    data.append()
