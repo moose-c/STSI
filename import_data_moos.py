@@ -41,4 +41,5 @@ for index, row in food_loss_whole_chain.iterrows():
     addition["year"] = row["year"]
     addition["loss_percentage"] = row["loss_percentage"]
     addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 2015
-    data.append()
+    addition["GDP"] = 0 # dit moet nog uit de df
+    data.append(addition)
