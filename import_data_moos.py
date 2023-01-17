@@ -15,8 +15,17 @@ countries = food_loss["country"]
 counts = food_loss['year'].value_counts()
 counts[counts > 100]
 
-food_loss['year'].shape[0] #nb of rows
+food_loss['food_supply_stage'].value_counts()
 
-print(countries.unique())
+food_loss_whole_chain = food_loss[food_loss['food_supply_stage'] == "Whole supply chain"]
+food_loss_whole_chain['country'].value_counts()
+food_loss_whole_chain['year'].value_counts()
+food_loss_whole_chain['loss_percentage']
+
+
+
+# food_loss['year'].shape[0] #nb of rows
+
+# print(countries.unique())
 
 # investige row 'activity' (whole supply chain)
