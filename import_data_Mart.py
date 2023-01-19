@@ -45,12 +45,21 @@ food_loss_whole_chain = food_loss[food_loss['food_supply_stage'] == "Whole suppl
    
     #data.append(addition)
 
+temperature = temperature.astype({'year':'int'})
+temp=temperature.transpose()
+temp.rename(columns=temp.iloc[0], inplace = True)
+temp.drop(temp.index[0], inplace = True)
+
+print(temp.head())
+
 FL=food_loss_whole_chain.join(GDP['2021'])
 FL['GDP2021']=FL['2021']
 
 fl2=food_loss_whole_chain
 fl2=fl2[fl2.year == 2002]
 
-FL2=fl2.join(GDP['2002'])
+FL2=fl2.join(GDP['2002'],temp['2002'])
 print(FL2)
-FL2.to_csv('out.csv')
+
+
+#FL2.to_csv('out.csv')
