@@ -30,4 +30,15 @@ GDP2021['Country']=GDP['Country Name']
 GDP2021['2021']=GDP['2021']
 print(GDP2021.head())
 
+food_loss_whole_chain = food_loss[food_loss['food_supply_stage'] == "Whole supply chain"]
+data = pd.DataFrame(columns=["country", "year", "loss_percentage", "GDP", "temperature"])
+for index, row in food_loss_whole_chain.iterrows():
+    addition = {}
+    addition["country"] = row["country"]
+    addition["year"] = row["year"]
+    addition["loss_percentage"] = row["loss_percentage"]
+   # addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 2015
+    addition["GDP"] = GDP2021[addition["country"]][addition['2021']]
+    data.append(addition)
 
+print(data.head())
