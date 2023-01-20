@@ -4,10 +4,11 @@ import datetime
 from dateutil.relativedelta import relativedelta
 pd.set_option('display.max_colwidth', None)
 
-food_loss = pd.read_csv('Food Loss Data.csv')
+food_loss = pd.read_csv('Food Loss Data.csv', index_col=1)
 GDP = pd.read_csv('global_gdp.csv', index_col=0)
-globaltempbycountry = pd.read_csv('GlobalLandTemperaturesByCountry.csv')
-temperature_anomalies = pd.read_csv('Environment_Temperature_change_E_All_Data_(Normalized).csv', encoding= 'unicode_escape')
+temperature = pd.read_csv('matYearCountry.csv')
+# globaltempbycountry = pd.read_csv('GlobalLandTemperaturesByCountry.csv')
+# temperature_anomalies = pd.read_csv('Environment_Temperature_change_E_All_Data_(Normalized).csv', encoding= 'unicode_escape')
 
 # for country in globaltempbycountry["Country"].unique():
 #     rows = globaltempbycountry[globaltempbycountry["Country"] == country]
@@ -49,12 +50,35 @@ food_loss_whole_chain['loss_percentage']
 # temperature['Albania'][2010]
 
 # make usable dataset
-data = pd.DataFrame(columns=["country", "year", "loss_percentage", "GDP", "temperature"])
-for index, row in food_loss_whole_chain.iterrows():
-    addition = {}
-    addition["country"] = row["country"]
-    addition["year"] = row["year"]
-    addition["loss_percentage"] = row["loss_percentage"]
-    # addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 2015
-    addition["GDP"] = 0 # dit moet nog uit de df
-    data.append(addition)
+# data = pd.DataFrame(columns=["country", "year", "loss_percentage", "GDP", "temperature"])
+# for index, row in food_loss_whole_chain.iterrows():
+#     addition = {}
+#     addition["country"] = row["country"]
+#     addition["year"] = row["year"]
+#     addition["loss_percentage"] = row["loss_percentage"]
+#     # addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 2015
+#     addition["GDP"] = 0 # dit moet nog uit de df
+#     data.append(addition)
+    
+# creating cleaned dataset
+fl2002=food_loss_whole_chain
+fl2002=fl2002[fl2002.year == 2002]
+fl2002 = fl2002.drop(columns=['activity', 'food_supply_stage', 'year', 'm49_code', 'region', 'cpc_code', 'commodity', 'loss_percentage_original', 'loss_quantity', 'treatment', 'cause_of_loss', 'sample_size', "method_data_collection", 'reference', 'url', 'notes'])
+
+
+# adding gdp data
+fl2002 = fl2002.join(GDP['2002'])
+fl2002["2002GDP"] = fl2002['2002']
+fl2002 = fl2002.drop(columns ='2002') 
+
+
+# adding temp data
+temperature = temperature.astype({'year':'str'})
+temp=temperature.transpose()
+temp.rename(columns=temp.iloc[0], inplace = True)
+temp.drop(temp.index[0], inplace = True)
+
+# computing correlation
+
+
+
