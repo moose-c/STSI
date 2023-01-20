@@ -58,13 +58,11 @@ temp = temp[1:]
 FL=food_loss_whole_chain.join(GDP['2021'])
 FL['GDP2021']=FL['2021']
 
+
+
 fl2=food_loss_whole_chain
 fl2=fl2[fl2.year == 2002]
 
-#temp.to_csv('temp.csv')
-
-#FL2=fl2.join(GDP['2002'],temp['2002'])
-#print(FL2)
 FL2=fl2.join(GDP['2002'])
 FL2['GDP2002']=FL2['2002']
 del FL2['2002']
