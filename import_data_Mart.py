@@ -74,3 +74,22 @@ del FL3['method_data_collection']
 print(FL3)
 
 FL3.to_csv('FL3_2002.csv')
+
+###############
+###2004
+###############
+
+fl4=food_loss_whole_chain
+fl4=fl4[fl4.year == 2004]
+
+FL4=fl4.join(GDP['2004'])
+FL4['GDP2004']=FL4['2004']
+del FL4['2004']
+FL5=FL4.join(temp['2004'])
+FL5['Temp2004']= FL5['2004']
+del FL5['2004']
+del FL5['notes']
+del FL5['method_data_collection']
+print(FL5)
+
+FL5.to_csv('FL5_2004.csv')
