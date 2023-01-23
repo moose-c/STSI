@@ -9,10 +9,13 @@ git merge origin/main
 Wijzingen aan data: 
 Food Loss Data: 
 - Venezuela (Bolivarian Republic of) -> Venezuela
+- "Republic of Korea -> "South Korea
 
 Global_Gdp:
 - Venezuela, RB -> Venezuela
 - North America -> United States of America
+- Slovak republic-> Slovakia
+- Korea, rep. -> South Korea 
 
 Temperature:
 - North America -> United States of America
