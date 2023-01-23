@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.express as px
 pd.set_option('display.max_colwidth', None)
 
 
@@ -24,13 +25,28 @@ del fl2002['2002']
 fl2002=fl2002.join(temp['2002'])
 fl2002['Temp2002']= fl2002['2002']
 del fl2002['2002']
+fl2002=fl2002.join(GDP['Country Code'])
 
 fl2002 = fl2002.rename(columns={"Unnamed: 0": "country"})
 fl2002 = fl2002.drop(columns=['m49_code','region', 'cpc_code', 'commodity', 'year', 'loss_quantity', 'loss_percentage_original', 'activity', 'food_supply_stage', 'treatment', 'cause_of_loss', 'sample_size', 'method_data_collection', 'reference', 'url', 'notes'])
 fl2002["Temp2002"] = fl2002["Temp2002"].astype(float)
+
+fl2002[fl2002.isna().any(axis=1)]
 
 # statistical analysis
 
 fl2002["loss_percentage"].corr(fl2002["Temp2002"])
 fl2002.plot.scatter(x="Temp2002", y="loss_percentage")
 plt.show()
+
+# wereld kaartje
+
+fig = px.choropleth(
+    fl2002,
+    locations="Country Code",
+    color="loss_percentage",
+    # hover_name="country"
+    # labels={"Value": "GDP per capita"}
+)
+
+fig.show()
