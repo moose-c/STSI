@@ -72,7 +72,7 @@ del FL3['2002']
 del FL3['notes']
 del FL3['method_data_collection']
 print(FL3)
-print(list(FL3.index.values))
+print(FL3.index)
 #FL3.to_csv('FL3_2002.csv')
 
 ###############
