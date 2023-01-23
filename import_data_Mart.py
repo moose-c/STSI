@@ -72,8 +72,8 @@ del FL3['2002']
 del FL3['notes']
 del FL3['method_data_collection']
 print(FL3)
-
-FL3.to_csv('FL3_2002.csv')
+print(list(FL3.index.values))
+#FL3.to_csv('FL3_2002.csv')
 
 ###############
 ###2004
@@ -92,4 +92,4 @@ del FL5['notes']
 del FL5['method_data_collection']
 print(FL5)
 
-FL5.to_csv('FL5_2004.csv')
+#FL5.to_csv('FL5_2004.csv')
