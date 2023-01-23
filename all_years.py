@@ -14,7 +14,7 @@ food_loss_whole_chain = food_loss_whole_chain[food_loss_whole_chain['year'] < 20
 data = pd.DataFrame(columns=["country", "year", "loss_percentage", "GDP", "temperature"])
 for index, row in food_loss_whole_chain.iterrows():
     addition = {}
-    addition["country"] = row["country"]
+    addition["country"] = row.name
     addition["year"] = row["year"]
     addition["loss_percentage"] = row["loss_percentage"]
     addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 2014
