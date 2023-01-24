@@ -2,7 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
+import seaborn as sns
 pd.set_option('display.max_colwidth', None)
+# from sklearn.linear_model import LinearRegression
 
 
 food_loss = pd.read_csv('Food Loss Data.csv', index_col=1)
@@ -36,7 +38,7 @@ fl2004["Temp2004"] = fl2004["Temp2004"].astype(float)
 
 fl2004["loss_percentage"].corr(fl2004["Temp2004"])
 fl2004.plot.scatter(x="Temp2004", y="loss_percentage")
-plt.show()
+# plt.show()
 
 # wereld kaartje
 fig_data = pd.DataFrame(columns=["Country Code", "loss_percentage"])
@@ -56,3 +58,10 @@ fig = px.choropleth(
 )
 
 fig.show()
+
+sns.lmplot(x='GDP2004',y='loss_percentage',data=fl2004,fit_reg=True) 
+plt.show()
+
+# model = LinearRegression()
+# model = LinearRegression.fit(fl2004['GDP2004'], fl2004['loss_percentage'])
+# # r_sq = model.score(x, y)

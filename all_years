@@ -19,8 +19,8 @@ for index, row in food_loss.iterrows():
     addition["year"] = row["year"]
     addition["loss_percentage"] = row["loss_percentage"]
     try:
-        addition["temperature"] = temperature[addition["country"]][addition["year"]] # nu maar tot 
-        addition["GDP"] = GDP[str(addition["year"])][addition["country"]] # dit moet nog uit de df
+        addition["temperature"] = temperature[addition["country"]][addition["year"]] 
+        addition["GDP"] = GDP[str(addition["year"])][addition["country"]] 
         addition_df = pd.DataFrame(addition, index=[0])
         data = pd.concat([data, addition_df])
     except KeyError:
@@ -38,7 +38,7 @@ data=data.join(GDP['Country Code'])
 fig_data = pd.DataFrame(columns=["Country Code", "loss_percentage"])
 for code in data["Country Code"].unique():
     addition = {"Country Code": code}
-    addition["loss_percentage"] = np.average(data[data["Country Code"] == code]["loss_percentage"])
+    addition["loss_percentage"] = np.median(data[data["Country Code"] == code]["loss_percentage"])
     addition_df = pd.DataFrame(addition, index=[0])
     fig_data = pd.concat([fig_data, addition_df])
 
