@@ -30,7 +30,7 @@ counts
 #GDP2021['2021']=GDP['2021']
 #print(GDP2021.head())
 
-food_loss_whole_chain = food_loss[food_loss['food_supply_stage'] == "Whole supply chain"]
+food_loss_whole_chain = food_loss #[food_loss['food_supply_stage'] == "Whole supply chain"]
 #print(food_loss_whole_chain['loss_percentage'].head())
 
 
