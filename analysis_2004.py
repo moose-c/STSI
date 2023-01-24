@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
@@ -39,9 +40,16 @@ plt.show()
 print(fl2004.corr(method='pearson'))
 
 # wereld kaartje
+fig_data = pd.DataFrame(columns=["Country Code", "loss_percentage"])
+for code in fl2004["Country Code"].unique():
+    addition = {"Country Code": code}
+    addition["loss_percentage"] = np.average(fl2004[fl2004["Country Code"] == code]["loss_percentage"])
+    addition_df = pd.DataFrame(addition, index=[0])
+    fig_data = pd.concat([fig_data, addition_df])
+
 
 fig = px.choropleth(
-    fl2004,
+    fig_data,
     locations="Country Code",
     color="loss_percentage",
     # hover_name="country"
