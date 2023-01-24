@@ -11,7 +11,7 @@ food_loss = pd.read_csv('Food Loss Data.csv', index_col=1)
 temperature = pd.read_csv('matYearCountry.csv')
 GDP = pd.read_csv('global_gdp.csv', index_col=0)
 
-food_loss_whole_chain = food_loss[food_loss['food_supply_stage'] == "Whole supply chain"]
+food_loss_whole_chain = food_loss#[food_loss['food_supply_stage'] == "Whole supply chain"]
 
 temperature = temperature.astype(str)
 
@@ -38,7 +38,12 @@ fl2004["Temp2004"] = fl2004["Temp2004"].astype(float)
 
 fl2004["loss_percentage"].corr(fl2004["Temp2004"])
 fl2004.plot.scatter(x="Temp2004", y="loss_percentage")
+<<<<<<< HEAD
 # plt.show()
+=======
+plt.show()
+print(fl2004.corr(method='pearson'))
+>>>>>>> origin/main
 
 # wereld kaartje
 fig_data = pd.DataFrame(columns=["Country Code", "loss_percentage"])
@@ -57,6 +62,7 @@ fig = px.choropleth(
     # labels={"Value": "GDP per capita"}
 )
 
+<<<<<<< HEAD
 fig.show()
 
 sns.lmplot(x='GDP2004',y='loss_percentage',data=fl2004,fit_reg=True) 
@@ -65,3 +71,6 @@ plt.show()
 # model = LinearRegression()
 # model = LinearRegression.fit(fl2004['GDP2004'], fl2004['loss_percentage'])
 # # r_sq = model.score(x, y)
+=======
+#fig.show()
+>>>>>>> origin/main
