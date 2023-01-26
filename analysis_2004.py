@@ -38,39 +38,41 @@ fl2004["Temp2004"] = fl2004["Temp2004"].astype(float)
 
 fl2004["loss_percentage"].corr(fl2004["Temp2004"])
 fl2004.plot.scatter(x="Temp2004", y="loss_percentage")
-<<<<<<< HEAD
-# plt.show()
-=======
 plt.show()
 print(fl2004.corr(method='pearson'))
->>>>>>> origin/main
-
 # wereld kaartje
 fig_data = pd.DataFrame(columns=["Country Code", "loss_percentage"])
 for code in fl2004["Country Code"].unique():
     addition = {"Country Code": code}
-    addition["loss_percentage"] = np.average(fl2004[fl2004["Country Code"] == code]["loss_percentage"])
+    addition["loss_percentage"] = np.mean(fl2004[fl2004["Country Code"] == code]["loss_percentage"])
     addition_df = pd.DataFrame(addition, index=[0])
     fig_data = pd.concat([fig_data, addition_df])
 
+highest = fig_data["loss_percentage"].max()
 
 fig = px.choropleth(
     fig_data,
     locations="Country Code",
     color="loss_percentage",
-    # hover_name="country"
-    # labels={"Value": "GDP per capita"}
+    range_color=(0,highest),
+    labels={"loss_percentage" : "Average Loss Percentage [%]"}
 )
 
-<<<<<<< HEAD
+fig.update_layout(
+    title={
+        'text':"Average loss percentage values for all countries, over all years",
+    },
+    font=dict(
+        family="Courier New, monospace",
+        size=18,
+        color="RebeccaPurple"
+    )
+    )
+
 fig.show()
 
-sns.lmplot(x='GDP2004',y='loss_percentage',data=fl2004,fit_reg=True) 
+sns.regplot(x='GDP2004',y='loss_percentage',data=fl2004,fit_reg=True) 
+plt.title('Scatterplot of GDP and Loss Percentage, for all measurements')
+plt.xlabel('GDPx')
+plt.ylabel("Loss Percentage")
 plt.show()
-
-# model = LinearRegression()
-# model = LinearRegression.fit(fl2004['GDP2004'], fl2004['loss_percentage'])
-# # r_sq = model.score(x, y)
-=======
-#fig.show()
->>>>>>> origin/main
